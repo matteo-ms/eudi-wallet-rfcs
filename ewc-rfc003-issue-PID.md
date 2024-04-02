@@ -4,16 +4,7 @@
 * Mr Matteo Mirabelli (Infocert, Italy)
 
 **Reviewers:** 
-
-* Dr Nikos Triantafyllou (University of the Aegean, Greece)
-* George Padaytti (iGrant.io, Sweden)
-* Mr Lal Chandran (iGrant.io, Sweden)
-* Dr Andreas Abraham (ValidatedID, Spain)
-* Mr Florin Coptil (Bosch, Germany)
-* Mr Matteo Mirabelli (Infocert, Italy)
-* Dr Mikael Linden (Vero, Finland) 
-* Mr Renaud Murat (Archipels, France)
-* Mr. Sebastian Bickerle (Lissi ID, Germany)
+TBD
 
 **Status:** Approved for v1.0 release
 
