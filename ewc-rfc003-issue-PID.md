@@ -83,7 +83,7 @@ The PID issuance follows detailed steps starting from the discovery of issuer ca
     I->>O: Token request
     O-->>I: Token response
     
-        Note over I,AS: Data Acquisition from Authentic Source
+    Note over O,AS: Data Acquisition from Authentic Source
     O->>AS: Request Personal Identifier Data
     AS-->>O: Provide Personal Identifier Data
 
