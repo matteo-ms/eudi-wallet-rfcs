@@ -6,7 +6,7 @@
 **Reviewers:** 
 TBD
 
-**Status:** Approved for v1.0 release
+**Status:** Ready for Review
 
 **Table of Contents**
 
