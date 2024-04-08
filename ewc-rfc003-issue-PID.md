@@ -76,12 +76,9 @@ The PID issuance follows detailed steps starting from the discovery of issuer ca
     I->>TA: Request Issuer Authorization Status
     TA-->>I: Confirm Issuer is Trusted
     
-    Note over I,O: Authenticate and Authorize
+    Note over I,O: Authenticate, Authorize, Check Wallet's Conformity
     I->>O: Authorization request
-    
-    Note over I,TA: Conformity Check of Wallet
     O->>I: Verify Wallet's Certificate of Conformity
-
     O-->>I: Authorization response 
     I->>O: Token request
     O-->>I: Token response
