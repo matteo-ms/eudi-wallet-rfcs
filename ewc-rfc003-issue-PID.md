@@ -776,6 +776,14 @@ Authorization: BEARER eyJ0eXAiOiJKV1QiLCJhbGci..zaEhOOXcifQ
 ```
 The holder can later use the acceptance_token to request the credential once it's ready for issuance.
 
+## 3.11 Issuer Authorization Verification
+
+During this process, the wallet queries the Trust Anchor to ascertain the issuer's trust status, thereby affirming that the issuer has been vetted and is compliant with established standards and regulations governing PID. It ensures that only entities with verified trustworthiness can issue PID. Further details will be added as soon as additional requirements are derived from ongoing discussions.
+
+## 3.12 Check Wallet's Conformity
+
+This verification process involves assessing whether the wallet possesses an internal certificate, issued by Certification Assessment Bodies (CAB), which confirms its compliance with the requisite standards for securely handling PID digital identities and associated qualified electronic attestations. It guarantees the secure storage and management of the PID. Further details will be added as soon as additional requirements are derived from ongoing discussions.
+
 # 4.0	Alternate response format
 
 Standard HTTP response codes shall be supported. Any additional ones can be formulated in the following format.
