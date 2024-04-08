@@ -45,54 +45,63 @@ The EWC LSP must align with the standard protocol for issuing PID from trusted a
 
 # 3.0	Messages
 
-The PID credential issuance process can follow either an authorization flow or a pre-authorized flow. These flows are depicted in the following diagrams, where the assumption is that the credential offer is obtained by the holder's wallet prior to discovery, either through the same device (e.g., clicking on a link) or across devices (e.g., scanning a QR code).
+The PID credential issuance process incorporates comprehensive steps to ensure the security, reliability, and compliance. This includes both an authorization flow and a pre-authorized flow, with additional preliminary and post-issuance steps to align with regulatory standards and security best practices. The process is illustrated below, incorporating the critical steps of Wallet Conformity, Trust Anchor Verification, Reliable Data Acquisition, PID Generation, Secure Issuance and Storage, Initial and Periodic Verification, and Renewal and Revocation Policies Management.
 
+### Preliminary Steps for PID Issuance:
+
+1. **Wallet Conformity:** Before initiating the PID issuance, the user's wallet must be confirmed to comply with established standards. This includes possessing an internal certificate from Certification Assessment Bodies (CAB) that validates its conformity, ensuring the wallet's capability to securely manage the PID and associated qualified electronic attestations.
+
+2. **Trust Anchor Verification:** The issuing entity's authorization within the Trust Anchor framework must be validated, ensuring it is listed as an authorized actor, thus guaranteeing that only verified entities can issue the PID.
+
+3. **Data Acquisition from Reliable Sources:** Personal data used for PID generation must be sourced from authentic and current databases, such as civil registries, ensuring the PID credentials are based on accurate and up-to-date information.
+
+### PID Credential Issuance Process:
+
+The PID issuance follows detailed steps starting from the discovery of issuer capabilities, through authentication and authorization, leading to the actual credential issuance. The process is adapted to include the preliminary steps, ensuring a secure and compliant issuance path.
 
 ```mermaid
   sequenceDiagram
     participant I as Individual using EUDI Wallet
+    participant TA as Trust Anchor
+    participant AS as Authentic Source
     participant O as Government Identity Provider
-
-    Note over I,O: Discovery issuer capabilities 
+    
+    Note over I,O: Discovery of Issuer Capabilities 
     I->>O: GET: /.well-known/openid-credential-issuer
     O-->>I: OpenID credential issuer configuration
     I->>O: GET: /.well-known/oauth-authorization-server
     O-->>I: OAuth authorization server metadata
+        
+    Note over I,TA: Issuer Authorization Verification
+    I->>TA: Request Issuer Authorization Status
+    TA-->>I: Confirm Issuer is Trusted
     
     Note over I,O: Authenticate and Authorize
     I->>O: Authorization request
+    
+    Note over I,TA: Conformity Check of Wallet
+    O->>I: Verify Wallet's Certificate of Conformity
+
     O-->>I: Authorization response 
     I->>O: Token request
     O-->>I: Token response
     
-    Note over I,O: Issue PID credential
-    I->>O: POST: Credential request with token 
-    O-->>I: Credential response with PID
+        Note over I,AS: Data Acquisition from Authentic Source
+    O->>AS: Request Personal Identifier Data
+    AS-->>O: Provide Personal Identifier Data
+
+    
+    Note over I,O: PID Generation and Secure Issuance
+    I->>O: POST: Credential request with token and Personal Identifier Data
+    O-->>I: Credential response with PID, stored securely in wallet
+
 ```
-Figure 1: PID Issuance using Authorization Code Flow based on [1]
+Figure 1: PID Issuance Process Incorporating Preliminary Checks
 
-```mermaid
-  sequenceDiagram
-    participant I as Individual using EUDI Wallet 
-    participant O as Government Identity Provider
+The process highlights the integration of the new preliminary steps with the traditional authorization code flow and pre-authorized code flow, adhering to the OID4VCI specification. It ensures a robust framework for digital identity issuance, from initial compliance verification to the secure generation and storage of PID credentials, followed by ongoing management.
 
-    Note over I,O: Discovery issuer capabilities
-    I->>O: GET: /.well-known/openid-credential-issuer
-    O-->>I: OpenID credential issuer configuration 
-    I->>O: GET: /.well-known/oauth-authorization-server
-    O-->>I: OAuth authorization server metadata
-
-    Note over I,O: Authenticate and Authorize  
-    I->>O: POST: Pre-authorized token request with PIN
-    O-->>I: Token response
-
-    Note over I,O: Issue PID credential
-    I->>O: POST: Credential request with token
-    O-->>I: Credential response with PID
-```
-Figure 2: PID Issuance using Pre-Authorization Code Flow based on [1]
-
-The diagrams illustrate the two flows for PID credential issuance, authorization code flow and pre-authorized code flow, aligned with the OID4VCI specification [1]. The process involves discovery, authentication, authorization, token exchange, and finally, the issuance of the PID credential itself.
+### Post-Issuance Verification and Management:
+Following the issuance of the PID, initial and periodic verification procedures are crucial to maintain the validity and integrity of the PID and its related electronic attestations. This includes checking for revocation status and ongoing compliance of both the wallet and issuer within the Trust Anchor framework. Additionally, policies for the renewal and revocation of PIDs and electronic attestations must be established to address changes in the individual's status, data breaches, or compliance issues.
 
 ## 3.1	Credential offer
 
